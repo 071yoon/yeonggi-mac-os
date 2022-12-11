@@ -1,27 +1,35 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import styled from "styled-components";
 import Search from "../components/Search";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Main>
-        <YeongGi>
-          <p style={{ color: "red" }}>Y</p>
-          <p style={{ color: "blue" }}>e</p>
-          <p style={{ color: "orange" }}>o</p>
-          <p style={{ color: "blue" }}>n</p>
-          <p style={{ color: "green" }}>g</p>
-          <p style={{ color: "red" }}>G</p>
-          <p style={{ color: "orange" }}>i</p>
-        </YeongGi>
-        <Search />
-        <BottomButtons>
-          <SingleButton>Google 검색</SingleButton>
-          <SingleButton>I'm Feeling Lucky</SingleButton>
-        </BottomButtons>
-      </Main>
-    </div>
+    <>
+      <Head>
+        <title>yeonggi's portfolio</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div>
+        <Main>
+          <YeongGi>
+            <p style={{ color: "red" }}>Y</p>
+            <p style={{ color: "blue" }}>e</p>
+            <p style={{ color: "orange" }}>o</p>
+            <p style={{ color: "blue" }}>n</p>
+            <p style={{ color: "green" }}>g</p>
+            <p style={{ color: "red" }}>G</p>
+            <p style={{ color: "orange" }}>i</p>
+          </YeongGi>
+          <Search />
+          <BottomButtons>
+            <SingleButton>Google 검색</SingleButton>
+            <SingleButton>I'm Feeling Lucky</SingleButton>
+          </BottomButtons>
+        </Main>
+      </div>
+    </>
   );
 };
 
