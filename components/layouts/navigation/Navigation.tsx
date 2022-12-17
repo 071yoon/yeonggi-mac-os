@@ -1,9 +1,14 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import finderData from "../../../data/finderData.json";
 
 export default function Navigation() {
-  // get finder data
-
+  const [date, setDate] = useState(new Date());
+  setInterval(() => {
+    setDate(new Date());
+  }, 1000);
+  const days = ["월", "화", "수", "목", "금", "토", "일"];
   return (
     <Container>
       <Align>
@@ -12,13 +17,32 @@ export default function Navigation() {
           alt="apple logo"
           width={14.652}
           height={18}
+          style={{ marginRight: "0.6rem" }}
         />
-        Finder 파일 편집 보기 이동 윈도우 도움말
+        {finderData.map((item, index) => (
+          <NavigationButton key={index}>{item.name}</NavigationButton>
+        ))}
       </Align>
-      <Align>12월 15일 (목) 오전 12:21</Align>
+      <Align>
+        {date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay() - 1]}){" "}
+        {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
+      </Align>
     </Container>
   );
 }
+
+const NavigationButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0 0.6rem;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+`;
 
 const Container = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
@@ -32,7 +56,6 @@ const Container = styled.div`
 
 const Align = styled.div`
   display: flex;
-  gap: 1rem;
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0 0.5rem;
