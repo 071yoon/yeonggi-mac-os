@@ -1,48 +1,40 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import MyDate from "./MyDate";
 import finderData from "../../../data/finderData.json";
+import SingleNavigation from "./SingleNavigation";
 
 export default function Navigation() {
-  const [date, setDate] = useState(new Date());
-  setInterval(() => {
-    setDate(new Date());
-  }, 1000);
-  const days = ["월", "화", "수", "목", "금", "토", "일"];
   return (
     <Container>
       <Align>
-        <Image
-          src="/assets/svg/apple-logo.svg"
-          alt="apple logo"
-          width={14.652}
-          height={18}
-          style={{ marginRight: "0.6rem" }}
-        />
+        <div
+          style={{
+            width: "1.2rem",
+            height: "0.8rem",
+            position: "relative",
+            marginRight: "0.4rem",
+          }}
+        >
+          <Image
+            src="/assets/svg/apple-logo.svg"
+            alt="apple logo"
+            sizes="0.8rem"
+            fill
+            style={{ objectFit: "contain" }}
+          />
+        </div>
         {finderData.map((item, index) => (
-          <NavigationButton key={index}>{item.name}</NavigationButton>
+          <SingleNavigation key={index} item={item} />
         ))}
       </Align>
       <Align>
-        {date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay() - 1]}){" "}
-        {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
+        <MyDate />
       </Align>
     </Container>
   );
 }
-
-const NavigationButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0 0.6rem;
-  transition: background-color 0.2s ease-in-out;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-`;
 
 const Container = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
@@ -59,4 +51,6 @@ const Align = styled.div`
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0 0.5rem;
+  height: 100%;
+  align-items: center;
 `;

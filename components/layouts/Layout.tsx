@@ -9,13 +9,14 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => (
-  <div>
+  <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
     <Image
       src="/assets/images/monterey-wallpaper.jpg"
-      alt="Monterey"
+      alt="MontereyWallpaper"
       fill
       style={{ objectFit: "cover" }}
-      quality={100}
+      loading="eager"
+      priority={true}
     />
     <header>
       <Navigation />
