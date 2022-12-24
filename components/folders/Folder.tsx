@@ -10,12 +10,11 @@ export default function Folder({
 }) {
   const alreadyClicked = clickedFolder === index;
 
-  const onPage = () => {
+  const onPage = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     if (alreadyClicked) {
-      setClickedFolderHandler(null);
       window.open(data.link, "_blank");
     } else {
-      console.log(index);
       setClickedFolderHandler(index);
     }
   };
