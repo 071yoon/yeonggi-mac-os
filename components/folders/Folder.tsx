@@ -2,27 +2,27 @@ import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
-export default function Folder({ data }) {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const onToggle = () => {
-    if (isClicked) {
-      setIsClicked(false);
-    }
-  };
+export default function Folder({
+  data,
+  setClickedFolderHandler,
+  clickedFolder,
+  index,
+}) {
+  const alreadyClicked = clickedFolder === index;
 
   const onPage = () => {
-    if (isClicked) {
-      setIsClicked(false);
+    if (alreadyClicked) {
+      setClickedFolderHandler(null);
       window.open(data.link, "_blank");
     } else {
-      setIsClicked(true);
+      console.log(index);
+      setClickedFolderHandler(index);
     }
   };
 
   return (
-    <Container onClick={onToggle}>
-      <SingleFolder onClick={onPage} isClicked={isClicked}>
+    <Container>
+      <SingleFolder onClick={onPage} isClicked={index === clickedFolder}>
         <Image
           src={`/assets/app-icons/${data.icon}`}
           alt={data.name}
