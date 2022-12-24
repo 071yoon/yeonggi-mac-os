@@ -34,7 +34,7 @@ const Left = styled.div`
   background-color: rgba(206, 206, 206, 0.95);
   padding-left: 0.6rem;
   padding-top: 0.6rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: start;
   justify-content: flex-start;

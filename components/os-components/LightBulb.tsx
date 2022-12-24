@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export default function LightBulb() {
   const onClose = () => {
@@ -15,9 +16,30 @@ export default function LightBulb() {
 
   return (
     <Container>
-      <button style={{ backgroundColor: "#ff0000" }} />
-      <button style={{ backgroundColor: "rgb(255, 213, 0)" }} />
-      <button style={{ backgroundColor: "#15cf37" }} />
+      <Button style={{ backgroundColor: "#ff0000" }}>
+        <Image
+          src="/assets/svg/x.svg"
+          alt="apple logo"
+          width={10}
+          height={10}
+        />
+      </Button>
+      <Button style={{ backgroundColor: "rgb(255, 191, 0)" }}>
+        <Image
+          src="/assets/svg/minimize.svg"
+          alt="apple logo"
+          width={8}
+          height={8}
+        />
+      </Button>
+      <Button style={{ backgroundColor: "#15cf37" }}>
+        <Image
+          src="/assets/svg/maximize.svg"
+          alt="apple logo"
+          width={6}
+          height={6}
+        />
+      </Button>
     </Container>
   );
 }
@@ -26,11 +48,25 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  button {
-    width: 0.6rem;
-    height: 0.6rem;
-    border-radius: 50%;
-    margin: 0.2rem;
-    border: none;
+`;
+
+const Button = styled.button`
+  position: relative;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  margin: 0.2rem;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    visibility: hidden;
+  }
+  &:hover {
+    img {
+      visibility: visible;
+    }
   }
 `;
