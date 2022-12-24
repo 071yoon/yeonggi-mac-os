@@ -1,14 +1,28 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
 export default function Folder({ data }) {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const onToggle = () => {
+    if (isClicked) {
+      setIsClicked(false);
+    }
+  };
+
   const onPage = () => {
-    window.open(data.link, "_blank");
+    if (isClicked) {
+      setIsClicked(false);
+      window.open(data.link, "_blank");
+    } else {
+      setIsClicked(true);
+    }
   };
 
   return (
-    <Container onClick={onPage}>
-      <SingleFolder>
+    <Container onClick={onToggle}>
+      <SingleFolder onClick={onPage} isClicked={isClicked}>
         <Image
           src={`/assets/app-icons/${data.icon}`}
           alt={data.name}
@@ -26,13 +40,35 @@ const Container = styled.div`
   height: 5rem;
 `;
 
-const SingleFolder = styled.div`
+const SingleFolder = styled.div<{ isClicked: boolean }>`
   position: absolute;
   right: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  img {
+    border-radius: 0.2rem;
+    ${({ isClicked }) =>
+      isClicked
+        ? `
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(0, 0, 0, 0.3);
+          `
+        : `
+            border: 2px solid rgba(0, 0, 0, 0);
+          `}
+  }
+  p {
+    ${({ isClicked }) =>
+      isClicked
+        ? `
+        background-color: rgb(29, 82, 253);
+    `
+        : `
+        background-color: none;
+    `}
+  }
 `;
 
 const Name = styled.p`
@@ -40,4 +76,6 @@ const Name = styled.p`
   font-size: 0.6rem;
   font-weight: bold;
   margin: 0.1rem 0;
+  padding: 0 0.2rem;
+  border-radius: 0.2rem;
 `;
