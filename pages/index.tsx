@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
+import FinderWindow from "../components/finder/SingleFinderWindow";
 import Folders from "../components/folders/Folders";
 
 const Home: NextPage = () => {
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <main>
+        <FinderWindow />
         <Folders />
       </main>
       <Background />
