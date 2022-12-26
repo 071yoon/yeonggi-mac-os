@@ -13,7 +13,7 @@ export default function MyDate() {
     setDate(dayjs().format());
   }, 250);
 
-  const days = ["월", "화", "수", "목", "금", "토", "일"];
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
 
   if (!date) {
     return <>1월 1일 (월) 00:00</>;
@@ -21,7 +21,7 @@ export default function MyDate() {
 
   return (
     <>
-      {dayjs(date).format("M월 D일") + " (" + days[dayjs(date).day() - 1] + ")"}
+      {dayjs(date).format("M월 D일") + " (" + days[dayjs(date).day()] + ")"}
       <Time>{dayjs(date).format("HH:mm:ss")}</Time>
     </>
   );
