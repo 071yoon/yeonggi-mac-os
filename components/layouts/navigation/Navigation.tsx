@@ -1,8 +1,7 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import MyDate from "./MyDate";
-import finderData from "../../../data/finderData.json";
+import { finderData } from "../../../utils/finder-data";
 import SingleNavigation from "./SingleNavigation";
 
 export default function Navigation() {
