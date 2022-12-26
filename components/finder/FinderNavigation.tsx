@@ -54,4 +54,5 @@ const Container = styled.div`
   padding-left: 0.6rem;
   background-color: rgba(241, 241, 241, 0.95);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: bold;
 `;

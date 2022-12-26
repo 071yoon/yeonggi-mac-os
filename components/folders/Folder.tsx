@@ -7,6 +7,7 @@ export default function Folder({
   setClickedFolderHandler,
   clickedFolder,
   index,
+  titleColor,
 }) {
   const alreadyClicked = clickedFolder === index;
   const { addFolder } = folderStore();
@@ -31,7 +32,7 @@ export default function Folder({
           height={65}
           style={{ borderRadius: "0.4rem" }}
         />
-        <Name>{data.name}</Name>
+        <Name titleColor={titleColor}>{data.name}</Name>
       </SingleFolder>
     </Container>
   );
@@ -40,6 +41,7 @@ export default function Folder({
 const Container = styled.div`
   position: relative;
   height: 5rem;
+  width: 5rem;
 `;
 
 const SingleFolder = styled.div<{ isClicked: boolean }>`
@@ -73,8 +75,8 @@ const SingleFolder = styled.div<{ isClicked: boolean }>`
   }
 `;
 
-const Name = styled.p`
-  color: white;
+const Name = styled.p<{ titleColor: string }>`
+  color: ${({ titleColor }) => titleColor};
   font-size: 0.6rem;
   font-weight: bold;
   margin: 0.1rem 0;

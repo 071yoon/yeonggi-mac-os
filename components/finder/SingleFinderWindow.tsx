@@ -25,7 +25,7 @@ export default function SingleFinderWindow({
       </Left>
       <Right>
         <FinderNavigation setPosition={setPosition} x={x} y={y} data={data} />
-        <FinderItems />
+        <FinderItems data={data} />
       </Right>
     </Container>
   );

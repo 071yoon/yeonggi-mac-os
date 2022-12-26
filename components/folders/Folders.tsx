@@ -24,6 +24,7 @@ export default function Folders() {
             index={index}
             clickedFolder={clickedFolder}
             setClickedFolderHandler={setClickedFolderHandler}
+            titleColor={"white"}
           />
         ))}
       </FoldersContainer>
@@ -39,4 +40,7 @@ const Container = styled.div`
 
 const FoldersContainer = styled.div`
   margin-top: 0.6rem;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
 `;

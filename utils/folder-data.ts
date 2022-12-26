@@ -25,13 +25,13 @@ export const folderData: folderInterface[] = [
         children: [
           {
             type: "application",
-            name: "modoco",
+            name: "page",
             icon: "modoco.png",
             link: "https://modocode.com",
           },
           {
             type: "application",
-            name: "modoco-repository",
+            name: "repository",
             icon: "modoco.png",
             link: "https://github.com/SWM-FIRE",
           },
@@ -41,6 +41,7 @@ export const folderData: folderInterface[] = [
         type: "application",
         name: "decrypto",
         icon: "decrypto.png",
+        link: "https://github.com/AndroidNetrunner/decrypto",
       },
     ],
   },
