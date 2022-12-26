@@ -1,24 +1,28 @@
+import { useState } from "react";
 import styled from "styled-components";
 import LightBulb from "../os-components/LightBulb";
 import FinderNavigation from "./FinderNavigation";
 import FinderItems from "./FinderItems";
 
 export default function SingleFinderWindow() {
+  const [{ x, y }, setPosition] = useState({ x: 0, y: 0 });
+
   return (
-    <Container>
+    <Container x={x} y={y}>
       <Left>
         <LightBulb />
       </Left>
       <Right>
-        <FinderNavigation />
+        <FinderNavigation setPosition={setPosition} x={x} y={y} />
         <FinderItems />
       </Right>
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ x: number; y: number }>`
   position: absolute;
+  transform: translate(${({ x }) => x}px, ${({ y }) => y}px);
   overflow: hidden;
   border-radius: 0.6rem;
   top: 10rem;
