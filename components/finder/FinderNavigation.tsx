@@ -1,10 +1,12 @@
 import React, { SetStateAction } from "react";
 import styled from "styled-components";
+import { folderInterface } from "../../interfaces/folder.interface";
 
 export default function FinderNavigation({
   setPosition,
   x,
   y,
+  data,
 }: {
   setPosition: React.Dispatch<
     SetStateAction<{
@@ -14,6 +16,7 @@ export default function FinderNavigation({
   >;
   x: number;
   y: number;
+  data: folderInterface;
 }) {
   const onMouseDown = (clickEvent: React.MouseEvent<Element, MouseEvent>) => {
     const mouseMoveHandler = (moveEvent: MouseEvent) => {
@@ -32,12 +35,23 @@ export default function FinderNavigation({
     document.addEventListener("mouseup", mouseUpHandler, { once: true });
   };
 
-  return <Container onMouseDown={(clickEvent) => onMouseDown(clickEvent)} />;
+  console.log(data);
+
+  return (
+    <Container onMouseDown={(clickEvent) => onMouseDown(clickEvent)}>
+      {/* <div>&lt; &gt;</div> */}
+      <div>{data.name}</div>
+    </Container>
+  );
 }
 
 const Container = styled.div`
   width: 100%;
   height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.6rem;
   background-color: rgba(241, 241, 241, 0.95);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import folderStore from "../../stores/folderStore";
 
 export default function Folder({
   data,
@@ -8,11 +9,13 @@ export default function Folder({
   index,
 }) {
   const alreadyClicked = clickedFolder === index;
+  const { addFolder } = folderStore();
 
   const onPage = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (alreadyClicked) {
-      window.open(data.link, "_blank");
+      if (data.type === "folder") addFolder(data);
+      else window.open(data.link, "_blank");
     } else {
       setClickedFolderHandler(index);
     }
@@ -26,6 +29,7 @@ export default function Folder({
           alt={data.name}
           width={65}
           height={65}
+          style={{ borderRadius: "0.4rem" }}
         />
         <Name>{data.name}</Name>
       </SingleFolder>

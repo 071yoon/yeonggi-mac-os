@@ -1,19 +1,30 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { folderInterface } from "../../interfaces/folder.interface";
 import LightBulb from "../os-components/LightBulb";
 import FinderNavigation from "./FinderNavigation";
 import FinderItems from "./FinderItems";
 
-export default function SingleFinderWindow() {
+export default function SingleFinderWindow({
+  data,
+  removeFolder,
+}: {
+  data: folderInterface;
+  removeFolder: (data: folderInterface) => void;
+}) {
   const [{ x, y }, setPosition] = useState({ x: 0, y: 0 });
+
+  const removeThisFolder = (data: folderInterface) => {
+    removeFolder(data);
+  };
 
   return (
     <Container x={x} y={y}>
       <Left>
-        <LightBulb />
+        <LightBulb removeFolder={() => removeThisFolder(data)} />
       </Left>
       <Right>
-        <FinderNavigation setPosition={setPosition} x={x} y={y} />
+        <FinderNavigation setPosition={setPosition} x={x} y={y} data={data} />
         <FinderItems />
       </Right>
     </Container>

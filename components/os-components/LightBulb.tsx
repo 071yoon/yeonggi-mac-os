@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-export default function LightBulb() {
+export default function LightBulb({
+  removeFolder,
+}: {
+  removeFolder: () => void;
+}) {
   const onClose = () => {
     console.log("close");
   };
@@ -22,6 +26,7 @@ export default function LightBulb() {
           alt="apple logo"
           width={10}
           height={10}
+          onClick={removeFolder}
         />
       </Button>
       <Button style={{ backgroundColor: "rgb(255, 191, 0)" }}>
