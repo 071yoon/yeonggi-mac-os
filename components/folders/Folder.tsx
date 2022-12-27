@@ -10,13 +10,15 @@ export default function Folder({
   titleColor,
 }) {
   const alreadyClicked = clickedFolder === index;
-  const { addFolder } = folderStore();
+  const { folders, addFolder } = folderStore();
 
   const onPage = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (alreadyClicked) {
-      if (data.type === "folder") addFolder(data);
-      else window.open(data.link, "_blank");
+      if (data.type === "folder") {
+        console.log(folders);
+        addFolder(data);
+      } else window.open(data.link, "_blank");
     } else {
       setClickedFolderHandler(index);
     }

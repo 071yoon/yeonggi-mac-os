@@ -9,10 +9,9 @@ interface FolderStoreInterface {
 
 const useFolderStore = create<FolderStoreInterface>((set) => ({
   folders: [],
-  addFolder: (folder) =>
-    set((state) => ({ folders: [...state.folders, folder] })),
-  removeFolder: (folder) =>
-    set((state) => ({ folders: state.folders.filter((f) => f !== folder) })),
+  addFolder: (by: folderInterface) => set((state) => ({ folders: [by] })),
+  removeFolder: (by: folderInterface) =>
+    set((state) => ({ folders: state.folders.filter((f) => f !== by) })),
 }));
 
 export default useFolderStore;

@@ -6,9 +6,13 @@ export default function FinderWindows() {
   const { folders, addFolder, removeFolder } = folderStore();
   return (
     <>
-      {folders.map((singleFolder) => {
+      {folders.map((singleFolder, index) => {
         return (
-          <SingleFinderWindow data={singleFolder} removeFolder={removeFolder} />
+          <SingleFinderWindow
+            key={Symbol(index).toString()}
+            data={singleFolder}
+            removeFolder={removeFolder}
+          />
         );
       })}
     </>

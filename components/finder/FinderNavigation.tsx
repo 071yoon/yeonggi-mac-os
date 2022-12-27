@@ -35,8 +35,6 @@ export default function FinderNavigation({
     document.addEventListener("mouseup", mouseUpHandler, { once: true });
   };
 
-  console.log(data);
-
   return (
     <Container onMouseDown={(clickEvent) => onMouseDown(clickEvent)}>
       {/* <div>&lt; &gt;</div> */}
