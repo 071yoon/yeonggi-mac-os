@@ -69,11 +69,12 @@ const SingleFolder = styled.div<{ isClicked: boolean }>`
     ${({ isClicked }) =>
       isClicked
         ? `
-        background-color: rgb(29, 82, 253);
-    `
+            background-color: rgb(29, 82, 253);
+            color: white;
+          `
         : `
-        background-color: none;
-    `}
+            background-color: none;
+          `}
   }
 `;
 
