@@ -53,6 +53,12 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    img {
+      visibility: visible;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -68,10 +74,5 @@ const Button = styled.button`
   align-items: center;
   img {
     visibility: hidden;
-  }
-  &:hover {
-    img {
-      visibility: visible;
-    }
   }
 `;
