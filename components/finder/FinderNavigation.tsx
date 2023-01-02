@@ -6,7 +6,7 @@ export default function FinderNavigation({
   setPosition,
   x,
   y,
-  data,
+  name,
 }: {
   setPosition: React.Dispatch<
     SetStateAction<{
@@ -16,7 +16,7 @@ export default function FinderNavigation({
   >;
   x: number;
   y: number;
-  data: folderInterface;
+  name: string;
 }) {
   const onMouseDown = (clickEvent: React.MouseEvent<Element, MouseEvent>) => {
     const mouseMoveHandler = (moveEvent: MouseEvent) => {
@@ -37,8 +37,11 @@ export default function FinderNavigation({
 
   return (
     <Container onMouseDown={(clickEvent) => onMouseDown(clickEvent)}>
-      {/* <div>&lt; &gt;</div> */}
-      <div>{data.name}</div>
+      <Left>
+        <ArrowButton>&lt;</ArrowButton>
+        <ArrowButton>&gt;</ArrowButton>
+        <Name>{name}</Name>
+      </Left>
     </Container>
   );
 }
@@ -53,4 +56,20 @@ const Container = styled.div`
   background-color: rgba(241, 241, 241, 0.95);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-weight: bold;
+`;
+
+const Left = styled.div`
+  display: flex;
+`;
+
+const ArrowButton = styled.button`
+  width: 1.2rem;
+  height: 1.2rem;
+  border: none;
+  background-color: inherit;
+  font-size: 1.2rem;
+`;
+
+const Name = styled.div`
+  margin-left: 0.6rem;
 `;

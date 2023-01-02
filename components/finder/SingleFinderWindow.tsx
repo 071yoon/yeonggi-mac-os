@@ -24,7 +24,12 @@ export default function SingleFinderWindow({
         <LightBulb removeFolder={() => removeThisFolder(data)} />
       </Left>
       <Right>
-        <FinderNavigation setPosition={setPosition} x={x} y={y} data={data} />
+        <FinderNavigation
+          setPosition={setPosition}
+          x={x}
+          y={y}
+          name={data.name}
+        />
         <FinderItems data={data} />
       </Right>
     </Container>
