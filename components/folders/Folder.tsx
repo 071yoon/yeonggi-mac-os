@@ -4,7 +4,7 @@ import folderStore from "../../stores/folderStore";
 
 export default function Folder({
   data,
-  setClickedFolderHandler,
+  handleClickFolder,
   clickedFolder,
   index,
   titleColor,
@@ -20,7 +20,7 @@ export default function Folder({
         addFolder(data);
       } else window.open(data.link, "_blank");
     } else {
-      setClickedFolderHandler(index);
+      handleClickFolder(index);
     }
   };
 

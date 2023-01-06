@@ -1,18 +1,11 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useClickFolder } from "../../hooks/useClickFolder";
 import { folderInterface } from "../../interfaces/folder.interface";
 import Folder from "../folders/Folder";
 
 export default function FinderItems({ data }: { data: folderInterface }) {
-  const [clickedFolder, setClickedFolder] = useState<number | null>(null);
-
-  const setClickedFolderHandler = (folderIndex: number | null) => {
-    setClickedFolder(folderIndex);
-  };
-
-  const onDisable = () => {
-    if (clickedFolder !== null) setClickedFolder(null);
-  };
+  const { clickedFolder, handleClickFolder, onDisable } = useClickFolder();
 
   return (
     <Container onClick={onDisable}>
@@ -23,7 +16,7 @@ export default function FinderItems({ data }: { data: folderInterface }) {
             data={item}
             index={index}
             clickedFolder={clickedFolder}
-            setClickedFolderHandler={setClickedFolderHandler}
+            handleClickFolder={handleClickFolder}
             titleColor={"black"}
           />
         );

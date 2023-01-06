@@ -1,18 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Folder from "./Folder";
+import { useClickFolder } from "../../hooks/useClickFolder";
 import { folderData } from "../../utils/folder-data";
 
 export default function Folders() {
-  const [clickedFolder, setClickedFolder] = useState<number | null>(null);
-
-  const setClickedFolderHandler = (folderIndex: number | null) => {
-    setClickedFolder(folderIndex);
-  };
-
-  const onDisable = () => {
-    if (clickedFolder !== null) setClickedFolder(null);
-  };
+  const { clickedFolder, handleClickFolder, onDisable } = useClickFolder();
 
   return (
     <Container onClick={onDisable}>
@@ -23,7 +16,7 @@ export default function Folders() {
             data={data}
             index={index}
             clickedFolder={clickedFolder}
-            setClickedFolderHandler={setClickedFolderHandler}
+            handleClickFolder={handleClickFolder}
             titleColor={"white"}
           />
         ))}
