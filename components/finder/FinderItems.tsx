@@ -7,6 +7,10 @@ import Folder from "../folders/Folder";
 export default function FinderItems({ data }: { data: folderInterface }) {
   const { clickedFolder, handleClickFolder, onDisable } = useClickFolder();
 
+  useEffect(() => {
+    onDisable();
+  }, [data]);
+
   return (
     <Container onClick={onDisable}>
       {data.children?.map((item, index) => {
