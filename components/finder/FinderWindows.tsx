@@ -1,5 +1,4 @@
 import SingleFinderWindow from "./SingleFinderWindow";
-import { folderData } from "../../utils/folder-data";
 import folderStore from "../../stores/folderStore";
 
 export default function FinderWindows() {

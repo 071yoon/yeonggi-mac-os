@@ -12,6 +12,8 @@ export default function SingleFinderWindow({
   data: folderInterface;
   removeFolder: (data: folderInterface) => void;
 }) {
+  const [folderStack, setFolderStack] = useState<folderInterface[]>([data]);
+  const [folderIndex, setFolderIndex] = useState<number>(0);
   const [{ x, y }, setPosition] = useState({ x: 0, y: 0 });
 
   const removeThisFolder = (data: folderInterface) => {
@@ -25,6 +27,9 @@ export default function SingleFinderWindow({
       </Left>
       <Right>
         <FinderNavigation
+          foldersLength={folderStack.length}
+          folderIndex={folderIndex}
+          setFolderIndex={setFolderIndex}
           setPosition={setPosition}
           x={x}
           y={y}
