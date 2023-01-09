@@ -14,7 +14,7 @@ export default function Folders() {
           <Folder
             key={Symbol(index).toString()}
             data={data}
-            index={index}
+            index={index.toString()}
             clickedFolder={clickedFolder}
             handleClickFolder={handleClickFolder}
             titleColor={"white"}

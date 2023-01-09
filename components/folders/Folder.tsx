@@ -21,7 +21,7 @@ export default function Folder({
   pushFolder,
 }: Props) {
   const alreadyClicked = clickedFolder === index;
-  const { folders, addFolder } = folderStore();
+  const { addFolder } = folderStore();
 
   const onPage = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
