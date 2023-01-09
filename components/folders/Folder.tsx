@@ -1,6 +1,16 @@
 import styled from "styled-components";
 import Image from "next/image";
 import folderStore from "../../stores/folderStore";
+import { folderInterface } from "../../interfaces/folder.interface";
+
+interface Props {
+  data: folderInterface;
+  handleClickFolder: (folder: string) => void;
+  clickedFolder: string | null;
+  index: string;
+  titleColor: string;
+  pushFolder?: (folder: folderInterface) => void;
+}
 
 export default function Folder({
   data,
@@ -8,7 +18,8 @@ export default function Folder({
   clickedFolder,
   index,
   titleColor,
-}) {
+  pushFolder,
+}: Props) {
   const alreadyClicked = clickedFolder === index;
   const { folders, addFolder } = folderStore();
 
@@ -16,8 +27,11 @@ export default function Folder({
     e.stopPropagation();
     if (alreadyClicked) {
       if (data.type === "folder") {
-        console.log(folders);
         addFolder(data);
+        console.log(pushFolder);
+        if (pushFolder !== undefined) {
+          pushFolder(data);
+        }
       } else window.open(data.link, "_blank");
     } else {
       handleClickFolder(index);

@@ -20,6 +20,13 @@ export default function SingleFinderWindow({
     removeFolder(data);
   };
 
+  const pushFolder = (folder: folderInterface) => {
+    setFolderStack((prev) => [...prev, folder]);
+    setFolderIndex((prev) => prev + 1);
+  };
+
+  console.log(folderStack);
+
   return (
     <Container x={x} y={y}>
       <Left>
@@ -35,7 +42,7 @@ export default function SingleFinderWindow({
           y={y}
           name={data.name}
         />
-        <FinderItems data={data} />
+        <FinderItems data={folderStack[folderIndex]} pushFolder={pushFolder} />
       </Right>
     </Container>
   );

@@ -4,7 +4,13 @@ import { useClickFolder } from "../../hooks/useClickFolder";
 import { folderInterface } from "../../interfaces/folder.interface";
 import Folder from "../folders/Folder";
 
-export default function FinderItems({ data }: { data: folderInterface }) {
+export default function FinderItems({
+  data,
+  pushFolder,
+}: {
+  data: folderInterface;
+  pushFolder: (folder: folderInterface) => void;
+}) {
   const { clickedFolder, handleClickFolder, onDisable } = useClickFolder();
 
   useEffect(() => {
@@ -18,10 +24,11 @@ export default function FinderItems({ data }: { data: folderInterface }) {
           <Folder
             key={Symbol(index).toString()}
             data={item}
-            index={index}
+            index={index.toString()}
             clickedFolder={clickedFolder}
             handleClickFolder={handleClickFolder}
             titleColor={"black"}
+            pushFolder={pushFolder}
           />
         );
       })}
