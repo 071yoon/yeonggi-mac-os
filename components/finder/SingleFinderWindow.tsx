@@ -12,8 +12,8 @@ export default function SingleFinderWindow({
   data: folderInterface;
   removeFolder: (data: folderInterface) => void;
 }) {
-  const DEFAULT_W = 30;
-  const DEFAULT_H = 15;
+  const DEFAULT_W = 600;
+  const DEFAULT_H = 300;
   const [folderStack, setFolderStack] = useState<folderInterface[]>([data]);
   const [folderIndex, setFolderIndex] = useState<number>(0);
   const [{ x, y, w, h }, setWindow] = useState({
@@ -50,6 +50,45 @@ export default function SingleFinderWindow({
     });
   };
 
+  const onMouseDown = ({
+    clickEvent,
+    yAxis,
+    xAxis,
+  }: {
+    clickEvent: React.MouseEvent<Element, MouseEvent>;
+    yAxis: boolean;
+    xAxis: boolean;
+  }) => {
+    const mouseMoveHandler = (moveEvent: MouseEvent) => {
+      const deltaX = moveEvent.screenX - clickEvent.screenX;
+      const deltaY = moveEvent.screenY - clickEvent.screenY;
+      if (yAxis && xAxis) {
+        setSize({
+          newW: w + deltaX,
+          newH: h + deltaY,
+        });
+      } else if (yAxis) {
+        setSize({
+          newW: w,
+          newH: h + deltaY,
+        });
+      } else if (xAxis) {
+        setSize({
+          newW: w + deltaX,
+          newH: h,
+        });
+      } else {
+        return;
+      }
+    };
+    const mouseUpHandler = () => {
+      document.removeEventListener("mousemove", mouseMoveHandler);
+    };
+
+    document.addEventListener("mousemove", mouseMoveHandler);
+    document.addEventListener("mouseup", mouseUpHandler, { once: true });
+  };
+
   const removeThisFolder = (data: folderInterface) => {
     removeFolder(data);
   };
@@ -78,31 +117,34 @@ export default function SingleFinderWindow({
         />
         <FinderItems data={folderStack[folderIndex]} pushFolder={pushFolder} />
       </Right>
+      <RightBorder
+        onMouseDown={(clickEvent) =>
+          onMouseDown({ clickEvent, yAxis: false, xAxis: true })
+        }
+      />
+      <DownBorder
+        onMouseDown={(clickEvent) =>
+          onMouseDown({ clickEvent, yAxis: true, xAxis: false })
+        }
+      />
+      <RightDownCorner
+        onMouseDown={(clickEvent) =>
+          onMouseDown({ clickEvent, yAxis: true, xAxis: true })
+        }
+      />
     </Container>
   );
 }
 
 const Container = styled.div<{ x: number; y: number; w: number; h: number }>`
-  position: absolute;
+  position: relative;
   transform: translate(${({ x }) => x}px, ${({ y }) => y}px);
   overflow: hidden;
   border-radius: 0.6rem;
   top: 10rem;
   left: 5rem;
-  ${({ w, h }) => {
-    if (w === 0 && h === 0) {
-      return `
-        width: 30rem;
-        height: 15rem;
-      `;
-    }
-    return `
-      width: 30rem;
-      height: 15rem;
-    `;
-  }}
-  /* width: ${({ w }) => w}rem;
-  height: ${({ h }) => h}rem; */
+  width: ${({ w }) => w}px;
+  height: ${({ h }) => h}px;
   display: flex;
 `;
 
@@ -121,4 +163,31 @@ const Left = styled.div`
 const Right = styled.div`
   width: 100%;
   height: 100%;
+`;
+
+const RightDownCorner = styled.div`
+  position: absolute;
+  cursor: nwse-resize;
+  height: 1rem;
+  bottom: 0;
+  right: 0;
+  width: 1rem;
+`;
+
+const RightBorder = styled.div`
+  position: absolute;
+  cursor: ew-resize;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  width: 0.5rem;
+`;
+
+const DownBorder = styled.div`
+  position: absolute;
+  cursor: ns-resize;
+  height: 0.5rem;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 `;
