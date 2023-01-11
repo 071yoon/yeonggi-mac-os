@@ -12,12 +12,7 @@ export default function FinderNavigation({
   name,
 }: {
   foldersLength: number;
-  setPosition: React.Dispatch<
-    SetStateAction<{
-      x: number;
-      y: number;
-    }>
-  >;
+  setPosition: ({ newX, newY }) => void;
   folderIndex: number;
   setFolderIndex: React.Dispatch<SetStateAction<number>>;
   x: number;
@@ -29,8 +24,8 @@ export default function FinderNavigation({
       const deltaX = moveEvent.screenX - clickEvent.screenX;
       const deltaY = moveEvent.screenY - clickEvent.screenY;
       setPosition({
-        x: x + deltaX,
-        y: y + deltaY,
+        newX: x + deltaX,
+        newY: y + deltaY,
       });
     };
     const mouseUpHandler = () => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { folderInterface } from "../../interfaces/folder.interface";
 import LightBulb from "../os-components/LightBulb";
@@ -12,9 +12,43 @@ export default function SingleFinderWindow({
   data: folderInterface;
   removeFolder: (data: folderInterface) => void;
 }) {
+  const DEFAULT_W = 30;
+  const DEFAULT_H = 15;
   const [folderStack, setFolderStack] = useState<folderInterface[]>([data]);
   const [folderIndex, setFolderIndex] = useState<number>(0);
-  const [{ x, y }, setPosition] = useState({ x: 0, y: 0 });
+  const [{ x, y, w, h }, setWindow] = useState({
+    x: 0,
+    y: 0,
+    w: 0,
+    h: 0,
+  });
+
+  useEffect(() => {
+    setWindow({
+      x: 0,
+      y: 0,
+      w: DEFAULT_W,
+      h: DEFAULT_H,
+    });
+  }, []);
+
+  const setPosition = ({ newX, newY }: { newX: number; newY: number }) => {
+    setWindow({
+      x: newX,
+      y: newY,
+      w,
+      h,
+    });
+  };
+
+  const setSize = ({ newW, newH }: { newW: number; newH: number }) => {
+    setWindow({
+      x,
+      y,
+      w: newW,
+      h: newH,
+    });
+  };
 
   const removeThisFolder = (data: folderInterface) => {
     removeFolder(data);
@@ -28,7 +62,7 @@ export default function SingleFinderWindow({
   console.log(folderStack);
 
   return (
-    <Container x={x} y={y}>
+    <Container x={x} y={y} w={w} h={h}>
       <Left>
         <LightBulb removeFolder={() => removeThisFolder(data)} />
       </Left>
@@ -48,15 +82,27 @@ export default function SingleFinderWindow({
   );
 }
 
-const Container = styled.div<{ x: number; y: number }>`
+const Container = styled.div<{ x: number; y: number; w: number; h: number }>`
   position: absolute;
   transform: translate(${({ x }) => x}px, ${({ y }) => y}px);
   overflow: hidden;
   border-radius: 0.6rem;
   top: 10rem;
   left: 5rem;
-  width: 30rem;
-  height: 15rem;
+  ${({ w, h }) => {
+    if (w === 0 && h === 0) {
+      return `
+        width: 30rem;
+        height: 15rem;
+      `;
+    }
+    return `
+      width: 30rem;
+      height: 15rem;
+    `;
+  }}
+  /* width: ${({ w }) => w}rem;
+  height: ${({ h }) => h}rem; */
   display: flex;
 `;
 
