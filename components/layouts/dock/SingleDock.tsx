@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import { useState } from "react";
 
 const getZoomRatio = (focus: number | null, index: number) => {
   if (focus === null) return 1;
@@ -18,12 +19,23 @@ const getZoomRatio = (focus: number | null, index: number) => {
 
 export default function SingleDock({ item, index, onFocus, focus }) {
   const zoomRatio = getZoomRatio(focus, index);
+  const [isClicked, setIsClicked] = useState(false);
+  console.log(isClicked);
+
+  const bounceApp = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 1000);
+  };
 
   return (
     <Container
       onMouseLeave={() => onFocus(null)}
       onMouseOver={() => onFocus(index)}
+      onClick={bounceApp}
       zoomRatio={zoomRatio}
+      isClicked={isClicked}
     >
       <Image
         src={`/assets/app-icons/${item.image}`}
@@ -43,7 +55,7 @@ const OnLight = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
 `;
 
-const Container = styled.button<{ zoomRatio }>`
+const Container = styled.button<{ zoomRatio: number; isClicked: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,6 +68,32 @@ const Container = styled.button<{ zoomRatio }>`
   transition: transform 0.05s ease-in-out;
   margin-bottom: ${({ zoomRatio }) => (zoomRatio - 1) * 3}rem;
   transform: scale(${({ zoomRatio }) => zoomRatio});
+
+  animation: ${({ isClicked }) => (isClicked ? `bounce 1s infinite` : "")};
+
+  @keyframes bounce {
+    0% {
+      transform: scale(1.6, 1.6) translateY(0);
+    }
+    10% {
+      transform: scale(1.7, 1.5) translateY(0);
+    }
+    30% {
+      transform: scale(1.5, 1.7) translateY(-50px);
+    }
+    50% {
+      transform: scale(1.6, 1.6) translateY(0);
+    }
+    57% {
+      transform: scale(1.6, 1.6) translateY(-7px);
+    }
+    64% {
+      transform: scale(1.6, 1.6) translateY(0);
+    }
+    100% {
+      transform: scale(1.6, 1.6) translateY(0);
+    }
+  }
 
   /* &:hover {
     background-color: rgba(255, 255, 255, 0.2);
