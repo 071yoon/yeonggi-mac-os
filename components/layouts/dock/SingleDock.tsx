@@ -52,7 +52,7 @@ const OnLight = styled.div`
   width: 0.2rem;
   height: 0.2rem;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
 `;
 
 const Container = styled.button<{ zoomRatio: number; isClicked: boolean }>`
@@ -68,30 +68,31 @@ const Container = styled.button<{ zoomRatio: number; isClicked: boolean }>`
   transition: transform 0.05s ease-in-out;
   margin-bottom: ${({ zoomRatio }) => (zoomRatio - 1) * 3}rem;
   transform: scale(${({ zoomRatio }) => zoomRatio});
+  img {
+    animation: ${({ isClicked }) => (isClicked ? `bounce 1s infinite` : "")};
 
-  animation: ${({ isClicked }) => (isClicked ? `bounce 1s infinite` : "")};
-
-  @keyframes bounce {
-    0% {
-      transform: scale(1.6, 1.6) translateY(0);
-    }
-    10% {
-      transform: scale(1.7, 1.5) translateY(0);
-    }
-    30% {
-      transform: scale(1.5, 1.7) translateY(-50px);
-    }
-    50% {
-      transform: scale(1.6, 1.6) translateY(0);
-    }
-    57% {
-      transform: scale(1.6, 1.6) translateY(-7px);
-    }
-    64% {
-      transform: scale(1.6, 1.6) translateY(0);
-    }
-    100% {
-      transform: scale(1.6, 1.6) translateY(0);
+    @keyframes bounce {
+      0% {
+        transform: scale(1, 1) translateY(0);
+      }
+      10% {
+        transform: scale(1.1, 0.9) translateY(0);
+      }
+      30% {
+        transform: scale(0.9, 1.1) translateY(-50px);
+      }
+      50% {
+        transform: scale(1, 1) translateY(0);
+      }
+      57% {
+        transform: scale(1, 1) translateY(-7px);
+      }
+      64% {
+        transform: scale(1, 1) translateY(0);
+      }
+      100% {
+        transform: scale(1, 1) translateY(0);
+      }
     }
   }
 
