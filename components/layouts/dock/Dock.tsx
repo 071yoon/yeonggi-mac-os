@@ -1,13 +1,26 @@
+import { useState } from "react";
 import { dockData } from "../../../utils/dock-data";
 import styled from "styled-components";
 import SingleDock from "./SingleDock";
 
 export default function Dock() {
+  const [focus, setFocus] = useState<number | null>(null);
+
+  const onFocus = (index: number) => {
+    setFocus(index);
+  };
+
   return (
     <Container>
       <DockBar>
         {dockData.map((item, index) => (
-          <SingleDock key={index} item={item} />
+          <SingleDock
+            key={index}
+            item={item}
+            index={index}
+            onFocus={onFocus}
+            focus={focus}
+          />
         ))}
       </DockBar>
     </Container>

@@ -1,9 +1,30 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function SingleDock({ item }) {
+const getZoomRatio = (focus: number | null, index: number) => {
+  if (focus === null) return 1;
+  const diff = Math.abs(focus - index);
+  switch (diff) {
+    case 0:
+      return 1.6;
+    case 1:
+      return 1.4;
+    case 2:
+      return 1.1;
+    default:
+      return 1;
+  }
+};
+
+export default function SingleDock({ item, index, onFocus, focus }) {
+  const zoomRatio = getZoomRatio(focus, index);
+
   return (
-    <Container>
+    <Container
+      onMouseLeave={() => onFocus(null)}
+      onMouseOver={() => onFocus(index)}
+      zoomRatio={zoomRatio}
+    >
       <Image
         src={`/assets/app-icons/${item.image}`}
         alt={item.name}
@@ -22,7 +43,7 @@ const OnLight = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
 `;
 
-const Container = styled.button`
+const Container = styled.button<{ zoomRatio }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,9 +53,11 @@ const Container = styled.button`
   font-size: 0.7rem;
   padding: 0.1rem 0.6rem;
   border-radius: 1rem;
-  transition: background-color 0.2s ease-in-out;
+  transition: transform 0.05s ease-in-out;
+  margin-bottom: ${({ zoomRatio }) => (zoomRatio - 1) * 3}rem;
+  transform: scale(${({ zoomRatio }) => zoomRatio});
 
-  &:hover {
+  /* &:hover {
     background-color: rgba(255, 255, 255, 0.2);
-  }
+  } */
 `;
