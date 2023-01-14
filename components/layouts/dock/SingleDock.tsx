@@ -34,43 +34,37 @@ export default function SingleDock({ item, index, onFocus, focus }) {
       onMouseLeave={() => onFocus(null)}
       onMouseOver={() => onFocus(index)}
       onClick={bounceApp}
-      zoomRatio={zoomRatio}
-      isClicked={isClicked}
     >
-      <Image
-        src={`/assets/app-icons/${item.image}`}
-        alt={item.name}
-        width={50}
-        height={50}
-      />
       <OnLight />
+      <ImgContainer zoomRatio={zoomRatio} isClicked={isClicked}>
+        <Image
+          src={`/assets/app-icons/${item.image}`}
+          alt={item.name}
+          width={50}
+          height={50}
+        />
+      </ImgContainer>
     </Container>
   );
 }
 
 const OnLight = styled.div`
+  position: absolute;
+  transform: none;
+  bottom: 0.2rem;
   width: 0.2rem;
   height: 0.2rem;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.5);
 `;
 
-const Container = styled.button<{ zoomRatio: number; isClicked: boolean }>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  font-size: 0.7rem;
-  padding: 0.1rem 0.6rem;
-  border-radius: 1rem;
-  transition: transform 0.05s ease-in-out;
-  margin-bottom: ${({ zoomRatio }) => (zoomRatio - 1) * 3}rem;
+const ImgContainer = styled.div<{ zoomRatio: number; isClicked: boolean }>`
+  position: relative;
   transform: scale(${({ zoomRatio }) => zoomRatio});
+  transition: transform 0.05s ease-in-out;
+  margin-bottom: ${({ zoomRatio }) => (zoomRatio - 1) * 2.6}rem;
   img {
     animation: ${({ isClicked }) => (isClicked ? `bounce 1s infinite` : "")};
-
     @keyframes bounce {
       0% {
         transform: scale(1, 1) translateY(0);
@@ -79,7 +73,7 @@ const Container = styled.button<{ zoomRatio: number; isClicked: boolean }>`
         transform: scale(1.1, 0.9) translateY(0);
       }
       30% {
-        transform: scale(0.9, 1.1) translateY(-50px);
+        transform: scale(0.9, 1.1) translateY(-30px);
       }
       50% {
         transform: scale(1, 1) translateY(0);
@@ -95,8 +89,16 @@ const Container = styled.button<{ zoomRatio: number; isClicked: boolean }>`
       }
     }
   }
+`;
 
-  /* &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  } */
+const Container = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 1rem;
 `;
