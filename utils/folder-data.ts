@@ -21,7 +21,7 @@ export const folderData: folderInterface[] = [
       {
         type: "folder",
         name: "modoco",
-        icon: "modoco.png",
+        icon: "folder.png",
         children: [
           {
             type: "application",
