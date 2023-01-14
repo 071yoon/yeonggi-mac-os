@@ -5,9 +5,14 @@ import SingleDock from "./SingleDock";
 
 export default function Dock() {
   const [focus, setFocus] = useState<number | null>(null);
+  const [enabledDocks, setEnabledDocks] = useState<number[]>([]);
 
   const onFocus = (index: number) => {
     setFocus(index);
+  };
+
+  const enableDock = (index: number) => {
+    setEnabledDocks([...enabledDocks, index]);
   };
 
   return (
@@ -20,6 +25,8 @@ export default function Dock() {
             index={index}
             onFocus={onFocus}
             focus={focus}
+            enableDock={enableDock}
+            isEnabled={enabledDocks.includes(index)}
           />
         ))}
       </DockBar>

@@ -17,13 +17,22 @@ const getZoomRatio = (focus: number | null, index: number) => {
   }
 };
 
-export default function SingleDock({ item, index, onFocus, focus }) {
+export default function SingleDock({
+  item,
+  index,
+  onFocus,
+  focus,
+  enableDock,
+  isEnabled,
+}) {
   const zoomRatio = getZoomRatio(focus, index);
   const [isClicked, setIsClicked] = useState(false);
   console.log(isClicked);
 
-  const bounceApp = () => {
+  const onClick = () => {
+    if (isEnabled) return;
     setIsClicked(true);
+    enableDock(index);
     setTimeout(() => {
       setIsClicked(false);
     }, 1000);
@@ -33,9 +42,9 @@ export default function SingleDock({ item, index, onFocus, focus }) {
     <Container
       onMouseLeave={() => onFocus(null)}
       onMouseOver={() => onFocus(index)}
-      onClick={bounceApp}
+      onClick={onClick}
     >
-      <OnLight />
+      <OnLight isEnabled={isEnabled} />
       <ImgContainer zoomRatio={zoomRatio} isClicked={isClicked}>
         <Image
           src={`/assets/app-icons/${item.image}`}
@@ -48,8 +57,9 @@ export default function SingleDock({ item, index, onFocus, focus }) {
   );
 }
 
-const OnLight = styled.div`
+const OnLight = styled.div<{ isEnabled: boolean }>`
   position: absolute;
+  display: ${({ isEnabled }) => (isEnabled ? "block" : "none")};
   transform: none;
   bottom: 0.2rem;
   width: 0.2rem;
