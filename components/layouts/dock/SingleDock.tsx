@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import DockDetail from "./DockDetail";
 import { useState } from "react";
 
 const getZoomRatio = (focus: number | null, index: number) => {
@@ -28,6 +29,14 @@ export default function SingleDock({
   const zoomRatio = getZoomRatio(focus, index);
   const [isClicked, setIsClicked] = useState(false);
 
+  const onLeave = () => {
+    onFocus(null);
+  };
+
+  const onHover = () => {
+    onFocus(index);
+  };
+
   const onClick = () => {
     if (isEnabled) return;
     setIsClicked(true);
@@ -38,12 +47,9 @@ export default function SingleDock({
   };
 
   return (
-    <Container
-      onMouseLeave={() => onFocus(null)}
-      onMouseOver={() => onFocus(index)}
-      onClick={onClick}
-    >
+    <Container onMouseLeave={onLeave} onMouseOver={onHover} onClick={onClick}>
       <OnLight isEnabled={isEnabled} />
+      {focus === index ? <DockDetail item={item} /> : null}
       <ImgContainer zoomRatio={zoomRatio} isClicked={isClicked}>
         <Image
           src={`/assets/app-icons/${item.image}`}
