@@ -28,7 +28,6 @@ export default function Folder({
     if (alreadyClicked) {
       if (data.type === "folder") {
         addFolder(data);
-        console.log(pushFolder);
         if (pushFolder !== undefined) {
           pushFolder(data);
         }

@@ -98,8 +98,6 @@ export default function SingleFinderWindow({
     setFolderIndex((prev) => prev + 1);
   };
 
-  console.log(folderStack);
-
   return (
     <Container x={x} y={y} w={w} h={h}>
       <Left>

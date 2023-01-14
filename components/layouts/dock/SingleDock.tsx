@@ -27,7 +27,6 @@ export default function SingleDock({
 }) {
   const zoomRatio = getZoomRatio(focus, index);
   const [isClicked, setIsClicked] = useState(false);
-  console.log(isClicked);
 
   const onClick = () => {
     if (isEnabled) return;
