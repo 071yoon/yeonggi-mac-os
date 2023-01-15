@@ -137,6 +137,7 @@ export default function SingleFinderWindow({
 const Container = styled.div<{ x: number; y: number; w: number; h: number }>`
   position: relative;
   transform: translate(${({ x }) => x}px, ${({ y }) => y}px);
+  box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.2);
   overflow: hidden;
   border-radius: 0.6rem;
   top: 10rem;
@@ -147,7 +148,7 @@ const Container = styled.div<{ x: number; y: number; w: number; h: number }>`
 `;
 
 const Left = styled.div`
-  width: 6rem;
+  min-width: 5rem;
   height: 100%;
   background-color: rgba(206, 206, 206, 0.95);
   padding-left: 0.6rem;
