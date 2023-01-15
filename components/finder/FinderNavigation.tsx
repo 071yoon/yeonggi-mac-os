@@ -48,13 +48,37 @@ export default function FinderNavigation({
     <Container onMouseDown={(clickEvent) => onMouseDown(clickEvent)}>
       <Left>
         <ArrowButton onClick={onLeft} disabled={folderIndex === 0}>
-          &lt;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
         </ArrowButton>
         <ArrowButton
           onClick={onRight}
           disabled={folderIndex === foldersLength - 1}
         >
-          &gt;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
         </ArrowButton>
         <Name>{name}</Name>
       </Left>
@@ -89,6 +113,14 @@ const ArrowButton = styled.button<{ disabled: boolean }>`
   &:hover {
     background-color: ${({ disabled }) =>
       disabled ? "inherit" : "rgba(0, 0, 0, 0.06)"};
+  }
+  svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transform: scale(2);
   }
 `;
 
