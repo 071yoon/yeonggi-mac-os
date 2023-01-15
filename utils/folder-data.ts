@@ -11,7 +11,7 @@ export const folderData: folderInterface[] = [
     type: "application",
     name: "Blog",
     icon: "blog.png",
-    link: "https://velog.io/@071yoon",
+    link: "https://071yoon.github.io",
   },
   {
     type: "folder",

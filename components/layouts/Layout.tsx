@@ -9,7 +9,10 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => (
-  <div style={{ width: "100vw", height: "100vh" }}>
+  <div
+    style={{ width: "100vw", height: "100vh", userSelect: "none" }}
+    onDrag={(e) => e.preventDefault()}
+  >
     <header>
       <Navigation />
     </header>
