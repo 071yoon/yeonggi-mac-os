@@ -5,6 +5,7 @@ import SingleDock from "./SingleDock";
 
 export default function Dock() {
   const [focus, setFocus] = useState<number | null>(null);
+  const [isReady, setIsReady] = useState<boolean>(false);
   const [enabledDocks, setEnabledDocks] = useState<number[]>([]);
 
   const onFocus = (index: number) => {
@@ -15,8 +16,16 @@ export default function Dock() {
     setEnabledDocks([...enabledDocks, index]);
   };
 
+  const onHoverDock = () => {
+    setIsReady(true);
+  };
+
+  const onLeaveDock = () => {
+    setIsReady(false);
+  };
+
   return (
-    <Container>
+    <Container onMouseOver={onHoverDock} onMouseLeave={onLeaveDock}>
       <DockBar>
         {dockData.map((item, index) => (
           <SingleDock
@@ -27,6 +36,7 @@ export default function Dock() {
             focus={focus}
             enableDock={enableDock}
             isEnabled={enabledDocks.includes(index)}
+            isReady={isReady}
           />
         ))}
       </DockBar>

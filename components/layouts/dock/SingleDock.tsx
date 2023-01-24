@@ -1,9 +1,12 @@
 import Image from "next/image";
 import styled from "styled-components";
 import DockDetail from "./DockDetail";
-import { useState } from "react";
+import { useState, useRef } from "react";
+
+const CONTAINER_SIZE = 2.8;
 
 const getZoomRatio = (focus: number | null, index: number) => {
+  return 1;
   if (focus === null) return 1;
   const diff = Math.abs(focus - index);
   switch (diff) {
@@ -25,9 +28,26 @@ export default function SingleDock({
   focus,
   enableDock,
   isEnabled,
+  isReady,
 }) {
   const zoomRatio = getZoomRatio(focus, index);
   const [isClicked, setIsClicked] = useState(false);
+  const [width, setWidth] = useState(CONTAINER_SIZE);
+  const imgRef = useRef(null);
+
+  const onMove = (e) => {
+    if (isReady && e) {
+      // get my current x and y position and compare with icon
+      // scale the icon based on the distance
+
+      const left = imgRef.current.getBoundingClientRect().left;
+      const right = imgRef.current.getBoundingClientRect().right;
+      let distance = Math.abs((left + right) / 2 - e.clientX) * 0.03;
+      distance = Math.max(0.7, distance);
+      distance = Math.min(1, distance);
+      setWidth(CONTAINER_SIZE / distance);
+    }
+  };
 
   const onLeave = () => {
     onFocus(null);
@@ -47,16 +67,22 @@ export default function SingleDock({
   };
 
   return (
-    <Container onMouseLeave={onLeave} onMouseOver={onHover} onClick={onClick}>
+    <Container
+      onMouseLeave={onLeave}
+      onMouseOver={onHover}
+      onClick={onClick}
+      onMouseMove={onMove}
+      ref={imgRef}
+      style={{
+        width: `${width}rem`,
+        height: `${width}rem`,
+        marginBottom: `${width - CONTAINER_SIZE}rem`,
+      }}
+    >
       <OnLight isEnabled={isEnabled} />
       {focus === index ? <DockDetail item={item} /> : null}
       <ImgContainer zoomRatio={zoomRatio} isClicked={isClicked}>
-        <Image
-          src={`/assets/app-icons/${item.image}`}
-          alt={item.name}
-          width={50}
-          height={50}
-        />
+        <Image src={`/assets/app-icons/${item.image}`} alt={item.name} fill />
       </ImgContainer>
     </Container>
   );
@@ -75,9 +101,9 @@ const OnLight = styled.div<{ isEnabled: boolean }>`
 
 const ImgContainer = styled.div<{ zoomRatio: number; isClicked: boolean }>`
   position: relative;
-  transform: scale(${({ zoomRatio }) => zoomRatio});
-  transition: transform 0.05s ease-in-out;
-  margin-bottom: ${({ zoomRatio }) => (zoomRatio - 1) * 2.6}rem;
+  width: 100%;
+  height: 100%;
+  transition: all 0.05s ease-in-out;
   img {
     animation: ${({ isClicked }) => (isClicked ? `bounce 1s infinite` : "")};
     @keyframes bounce {
@@ -114,6 +140,6 @@ const Container = styled.button`
   background-color: transparent;
   border: none;
   font-size: 0.7rem;
-  padding: 0.1rem 0.6rem;
+  padding: 0.1rem 0.2rem;
   border-radius: 1rem;
 `;
