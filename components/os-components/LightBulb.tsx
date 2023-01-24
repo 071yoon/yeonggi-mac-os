@@ -20,29 +20,33 @@ export default function LightBulb({
 
   return (
     <Container>
-      <Button style={{ backgroundColor: "#ff0000" }}>
+      <Button
+        style={{
+          backgroundColor: "#ff0000",
+        }}
+      >
         <Image
-          src="/assets/svg/x.svg"
-          alt="apple logo"
-          width={10}
-          height={10}
+          src="/assets/svg/close.svg"
+          alt="close"
+          width={9}
+          height={9}
           onClick={onClose}
         />
       </Button>
       <Button style={{ backgroundColor: "rgb(255, 191, 0)" }}>
         <Image
           src="/assets/svg/minimize.svg"
-          alt="apple logo"
-          width={8}
-          height={8}
+          alt="minimize"
+          width={9}
+          height={9}
         />
       </Button>
       <Button style={{ backgroundColor: "#15cf37" }}>
         <Image
-          src="/assets/svg/maximize.svg"
-          alt="apple logo"
-          width={6}
-          height={6}
+          src="/assets/svg/expand.svg"
+          alt="maximize"
+          width={12}
+          height={12}
         />
       </Button>
     </Container>
@@ -63,8 +67,8 @@ const Container = styled.div`
 
 const Button = styled.button`
   position: relative;
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 50%;
   margin: 0.2rem;
   border: none;
