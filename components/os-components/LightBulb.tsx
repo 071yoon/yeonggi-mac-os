@@ -28,8 +28,8 @@ export default function LightBulb({
         <Image
           src="/assets/svg/close.svg"
           alt="close"
-          width={9}
-          height={9}
+          width={6}
+          height={6}
           onClick={onClose}
         />
       </Button>
@@ -37,16 +37,17 @@ export default function LightBulb({
         <Image
           src="/assets/svg/minimize.svg"
           alt="minimize"
-          width={9}
-          height={9}
+          width={6}
+          height={6}
         />
       </Button>
       <Button style={{ backgroundColor: "#15cf37" }}>
         <Image
+          style={{ marginTop: "0.1rem" }}
           src="/assets/svg/expand.svg"
           alt="maximize"
-          width={12}
-          height={12}
+          width={10}
+          height={10}
         />
       </Button>
     </Container>
@@ -67,8 +68,8 @@ const Container = styled.div`
 
 const Button = styled.button`
   position: relative;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
   border-radius: 50%;
   margin: 0.2rem;
   border: none;
@@ -76,6 +77,7 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
   img {
     visibility: hidden;
   }

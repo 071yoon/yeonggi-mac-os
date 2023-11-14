@@ -25,6 +25,25 @@ export default function Dock() {
   };
 
   return (
+    <Container>
+      <DockBar>
+        {dockData.map((item, index) => (
+          <SingleDock
+            key={index}
+            item={item}
+            index={index}
+            onFocus={onFocus}
+            focus={focus}
+            enableDock={enableDock}
+            isEnabled={enabledDocks.includes(index)}
+            isReady={isReady}
+          />
+        ))}
+      </DockBar>
+    </Container>
+  );
+
+  return (
     <Container onMouseOver={onHoverDock} onMouseLeave={onLeaveDock}>
       <DockBar>
         {dockData.map((item, index) => (

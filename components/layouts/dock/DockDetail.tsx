@@ -27,7 +27,7 @@ export default function DockDetail({ item }) {
 
 const Container = styled.div`
   position: absolute;
-  top: -3.8rem;
+  top: -2.4rem;
   display: flex;
   gap: 0rem;
   align-items: center;
