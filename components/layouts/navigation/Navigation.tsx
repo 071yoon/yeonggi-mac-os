@@ -4,9 +4,21 @@ import MyDate from "./MyDate";
 import { finderData } from "../../../utils/finder-data";
 import SingleNavigation from "./SingleNavigation";
 
-export default function Navigation() {
+export default function Navigation({
+  handleClickNavigation,
+  clickedNavigation,
+}: {
+  handleClickNavigation: (num?: number) => void;
+  clickedNavigation: number;
+}) {
   return (
-    <Container>
+    <Container
+      onClick={(e) => {
+        if (clickedNavigation) {
+          handleClickNavigation();
+        }
+      }}
+    >
       <Align>
         <div
           style={{
@@ -25,7 +37,23 @@ export default function Navigation() {
           />
         </div>
         {finderData.map((item, index) => (
-          <SingleNavigation key={index} item={item} />
+          <div
+            style={{ height: "100%", display: "flex", alignItems: "center" }}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (clickedNavigation === index) {
+                handleClickNavigation();
+              } else {
+                handleClickNavigation(index);
+              }
+            }}
+          >
+            <SingleNavigation
+              key={index}
+              item={item}
+              isClicked={clickedNavigation === index}
+            />
+          </div>
         ))}
       </Align>
       <Align>
@@ -52,6 +80,7 @@ const Align = styled.div`
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0 0.5rem;
-  height: 100%;
   align-items: center;
+  height: 100%;
+  justify-content: center;
 `;

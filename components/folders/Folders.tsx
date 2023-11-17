@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Folder from "./Folder";
 import { useClickFolder } from "../../hooks/useClickFolder";
