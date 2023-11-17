@@ -22,7 +22,7 @@ export default function LightBulb({
     <Container>
       <Button
         style={{
-          backgroundColor: "#ff0000",
+          backgroundColor: "#ff5a5a",
         }}
       >
         <Image
@@ -41,7 +41,7 @@ export default function LightBulb({
           height={6}
         />
       </Button>
-      <Button style={{ backgroundColor: "#15cf37" }}>
+      <Button style={{ backgroundColor: "#41d45c" }}>
         <Image
           style={{ marginTop: "0.1rem" }}
           src="/assets/svg/expand.svg"
