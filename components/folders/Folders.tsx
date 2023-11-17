@@ -27,6 +27,7 @@ export default function Folders() {
 
 const Container = styled.div`
   position: absolute;
+  top: 1rem;
   width: 100vw;
   height: calc(100% - 4.2rem);
 `;

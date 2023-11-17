@@ -36,6 +36,8 @@ export default function Navigation() {
 }
 
 const Container = styled.div`
+  position: absolute;
+  top: 0;
   background-color: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
