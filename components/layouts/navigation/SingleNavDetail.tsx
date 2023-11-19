@@ -10,7 +10,7 @@ export default function SingleNavDetail({ item }) {
               style={{
                 width: "calc(100% - 1rem)",
                 height: "1px",
-                backgroundColor: "#93939386",
+                backgroundColor: "#a4a4a4",
                 margin: "0 0.5rem",
               }}
             />
@@ -28,16 +28,18 @@ const Container = styled.div`
 
   top: 1.215rem;
   left: 0;
-  background-color: #ffffff87;
+  backdrop-filter: blur(10px);
+  background-color: #ebe6e6f5;
   border-radius: 0.2rem;
   inline-size: max-content;
+  box-shadow: 0 0 0.6rem 0.4rem rgba(0, 0, 0, 0.1);
 `;
 
 const NavDetail = styled.div`
   margin: 0.2rem;
   padding: 0.2rem 0.6rem;
   font-weight: 400;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   border-radius: 0.2rem;
   cursor: pointer;
 

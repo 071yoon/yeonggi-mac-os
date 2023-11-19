@@ -150,7 +150,7 @@ const Container = styled.div<{ x: number; y: number; w: number; h: number }>`
 const Left = styled.div`
   min-width: 5rem;
   height: 100%;
-  background-color: rgba(206, 206, 206, 0.95);
+  background-color: rgba(232, 232, 232, 0.95);
   padding-left: 0.6rem;
   padding-top: 0.6rem;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
