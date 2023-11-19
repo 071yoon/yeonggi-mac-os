@@ -2,7 +2,9 @@ import styled from "styled-components";
 import Image from "next/image";
 import MyDate from "./MyDate";
 import { finderData } from "../../../utils/finder-data";
+import { aboutMac } from "../../../utils/about-mac";
 import SingleNavigation from "./SingleNavigation";
+import SingleNavDetail from "./SingleNavDetail";
 
 export default function Navigation({
   handleClickNavigation,
@@ -27,7 +29,18 @@ export default function Navigation({
             position: "relative",
             marginRight: "0.4rem",
           }}
+          // onClick={(e) => {
+          //   e.stopPropagation();
+          //   if (clickedNavigation === 999) {
+          //     handleClickNavigation();
+          //   } else {
+          //     handleClickNavigation(999);
+          //   }
+          // }}
         >
+          {/* {clickedNavigation === 999 && (
+            <SingleNavDetail item={{ options: aboutMac }} />
+          )} */}
           <Image
             src="/assets/svg/apple-logo.svg"
             alt="apple logo"
@@ -49,6 +62,7 @@ export default function Navigation({
             }}
           >
             <SingleNavigation
+              isBold={index === 0}
               key={index}
               item={item}
               isClicked={clickedNavigation === index}
