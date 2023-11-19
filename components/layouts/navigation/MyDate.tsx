@@ -20,15 +20,19 @@ export default function MyDate() {
   }
 
   return (
-    <>
+    <Container>
       {dayjs(date).format("M월 D일") + " (" + days[dayjs(date).day()] + ")"}
       <Time>{dayjs(date).format("HH:mm:ss")}</Time>
-    </>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  font-size: 0.7rem;
+  display: flex;
+`;
+
 const Time = styled.div`
   width: 3rem;
-  font-size: 0.8rem;
   margin-left: 0.4rem;
 `;

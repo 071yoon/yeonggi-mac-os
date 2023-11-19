@@ -36,9 +36,9 @@ const SingleNav = styled.button<{ isClicked: boolean }>`
 const SingleNavDetailContainer = styled.div`
   position: absolute;
 
-  top: 1.2rem;
+  top: 1.215rem;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.623);
+  background-color: #ffffff87;
   border-radius: 0.2rem;
   inline-size: max-content;
 `;
